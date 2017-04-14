@@ -1,0 +1,11 @@
+---
+- name: add nix user
+  user: name=nix shell=/bin/bash
+
+- name: create /nix
+  file: dest=/nix state=directory owner=nix group=nix
+
+- name: set up nix
+  become: yes
+  become_user: nix
+  shell: curl https://nixos.org/nix/install | sh
